@@ -4,6 +4,7 @@ import { NgFor, UpperCasePipe } from '@angular/common';
 import { IHero } from './types/hero.interface';
 import { HEROES } from './const/mock.heroes';
 import { HeroService } from './services/hero.service';
+import { MessageService } from '../messages/services/message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -16,7 +17,8 @@ export class HeroesComponent {
   selectedHero?: IHero;
 
   constructor(
-    private readonly heroService: HeroService
+    private readonly heroService: HeroService,
+    private readonly messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class HeroesComponent {
 
   onSelect(hero: IHero) {
     this.selectedHero = hero;
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
   getHeroes(): void {
